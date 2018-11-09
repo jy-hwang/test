@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- <mapper namespace="net.koreate.mappers.BoardMapper"> -->
+<mapper namespace="net.koreate.dao.BoardDao">
+
+
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and title LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and content LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and writer LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and (title LIKE CONCAT('%',#{keyword},'%')
+				OR content LIKE
+				CONCAT('%',#{keyword},'%')
+				)
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				and (content LIKE CONCAT('%',#{keyword},'%')
+				OR writer
+				LIKE CONCAT('%',#{keyword},'%')
+				)
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and (title LIKE CONCAT('%',#{keyword},'%')
+				OR content LIKE
+				CONCAT('%',#{keyword},'%')
+				OR writer LIKE CONCAT('%',#{keyword},'%')
+				)
+			</if>
+		</if>
+	</sql>
+
+
+
+	<!-- <insert id="registerReply" useGeneratedKeys="true"
+		keyProperty="bno" keyColumn="bno" parameterType="boardVo"> -->
+		<insert id="registerReply">
+		INSERT INTO
+		re_tbl_board(title,content,writer,uno)
+		VALUES(#{title},#{content},#{writer},#{uno})
+	</insert>
+
+	<!-- <update id="updateOrigin">
+		UPDATE re_tbl_board SET origin=#{bno} WHERE bno =
+		#{bno}
+	</update> -->
+	
+	<update id="updateOrigin">
+		UPDATE re_tbl_board SET origin= last_insert_id() WHERE bno =
+		last_insert_id()
+	</update>
+	
+	<insert id="addAttach">
+	insert into tbl_attach(fullName,bno)
+	values(#{fullName}, last_insert_id())
+	
+	</insert>
+	
+	<select id="getAttach" resultType="string">
+	
+	select fullName from tbl_attach where bno = #{bno} order by regdate
+	
+	</select>
+	
+	
+	
+	
+
+	<select id="listReplyCriteria" resultType="boardVo">
+		
+		<![CDATA[
+		SELECT * FROM 
+		re_tbl_board
+		where bno > 0 	
+		]]>
+		<include refid="search"></include>
+		order by origin desc, seq asc
+		limit #{pageStart},#{perPageNum}
+	</select>
+
+	<select id="listReplyCount" resultType="int">
+	<![CDATA[
+		SELECT count(*) FROM re_tbl_board where bno > 0 	
+		]]>
+		<include refid="search"></include>
+	</select>
+
+	<update id="updateCnt">
+		UPDATE re_tbl_board SET viewcnt = viewcnt+1 WHERE bno= #{bno}
+	</update>
+
+	<select id="readReply" resultType="boardVo">
+
+		select * from re_tbl_board where bno = #{bno}
+
+	</select>
+	
+<update id="updateReply">
+update re_tbl_board set seq = seq + 1 where origin = #{origin} and seq > #{seq}
+</update>
+
+
+<insert id="replyRegister">
+
+insert into re_tbl_board(title,content,writer,origin,depth,seq,uno)
+values(#{title},#{content},#{writer},#{origin},#{depth},#{seq},#{uno})
+</insert>
+
+<delete id="delete">
+delete from re_tbl_board where bno = #{bno}
+</delete>
+
+<update id="update">
+update re_tbl_board set title=#{title}, content =#{content} where bno = #{bno}
+</update>
+
+
+<delete id="deleteAttach">
+delete from tbl_attach where bno = #{bno}
+
+</delete>
+
+<insert id="replaceAttach">
+insert into tbl_attach(fullName,bno)
+values(#{fullName},#{bno})
+</insert>
+
+<!-- 댓글 갯수  -->
+<select id="getCommentCnt" resultType="int">
+select count(bno) from tbl_comment where bno = #{bno}
+
+</select>
+
+
+</mapper>
