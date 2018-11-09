@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="net.koreate.dao.FreeBoardDao">
+
+<insert id="register">
+insert into tbl_board_free(ftitle,fcontent,fwriter,mno,mcate)
+values(#{fTitle},#{fContent},#{fWriter},#{mno},#{mcate})
+</insert>
+
+<select id="listFreeCriteria" resultType="freeBoardVo">
+
+<![CDATA[ select * from tbl_board_free where fno> 0 order by fno desc]]>
+
+</select>
+
+<select id="listFreeCount" resultType="int">
+
+<![CDATA[select count(*) from tbl_board_free where fno>0 ]]>
+
+</select>
+
+
+</mapper>

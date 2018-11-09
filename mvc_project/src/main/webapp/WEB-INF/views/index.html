@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <title></title>
+  </head>
+
+
+  <body>
+    <input type="button" id="listButton" value="리스트출력">
+<br/>
+<div id="listDiv">
+
+</div>
+
+
+
+    <script type="text/javascript">
+
+      $(function(){
+        $("#listButton").click(function(){
+        $.ajax({
+          type:'post',
+          url:'list.html',
+          dataType:'html',
+          success:function(data){
+            $("#listDiv").html(data);
+          }
+
+
+        });
+      })
+    })
+
+    </script>
+
+  </body>
+</html>

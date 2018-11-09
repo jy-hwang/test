@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:beans="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+  <!-- Root Context: defines shared resources visible to all other web components -->
+
+  <beans:bean id="signUpInterceptor" class="net.koreate.interceptor.SignUpInterceptor"></beans:bean>
+  <beans:bean id="signInInterceptor" class="net.koreate.interceptor.SignInInterceptor"></beans:bean>
+  <beans:bean id="checkCookieInterceptor" class="net.koreate.interceptor.CheckCookieInterceptor"></beans:bean>
+  <beans:bean id="authInterceptor" class="net.koreate.interceptor.AuthInterceptor"></beans:bean>
+  <interceptors>
+
+    <interceptor>
+      <mapping path="/member/signUpPost"/>
+      <beans:ref bean="signUpInterceptor"/>
+    </interceptor>
+
+    <interceptor>
+      <mapping path="/member/signInPost"/>
+      <beans:ref bean="signInInterceptor"/>
+    </interceptor>
+
+    <interceptor>
+      <mapping path="/boardf/*"/>
+      <exclude-mapping path="/boardf/listFree"/>
+      <beans:ref bean="authInterceptor"/>
+
+
+    </interceptor>
+
+    <!-- <interceptor>
+      <mapping path="/**"/>
+      <exclude-mapping path="/**/*"/>
+      <exclude-mapping path="/user/*"/>
+      <exclude-mapping path="/member/signIn"/>
+      <exclude-mapping path="/member/signInPost"/>
+      <exclude-mapping path="/member/signUp"/>
+      <exclude-mapping path="/member/signPost"/>
+      <exclude-mapping path="/member/signOut"/>
+      <beans:ref bean="checkCookieInterceptor"/>
+    </interceptor>
+ -->
+  </interceptors>
+
+</beans:beans>
+  
