@@ -41,8 +41,9 @@ List<FreeBoardVo> list = dao.listFreeCriteria(cri);
   @Override
   public FreeBoardVo readFree(int fno) throws Exception {
 
+	  FreeBoardVo fbvo = dao.readFree(fno);
     
-    return null;
+    return fbvo;
   }
   
   

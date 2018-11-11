@@ -55,16 +55,18 @@ public class FreeBoardController {
     rttr.addAttribute("searchType", cri.getSearchType());
     rttr.addAttribute("keyword", cri.getKeyword());
     
-    return "redirect:/board/readDetail";
+    return "redirect:/boardf/readDetail";
   }
   
+  @RequestMapping(value="/readDetail", method=RequestMethod.GET)
   public String readDetail(@ModelAttribute("fno") int fno, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception{
-    
+    System.out.println("읽으려는 글의 번호 : " + fno);
     FreeBoardVo fbvo = service.readFree(fno);
+    System.out.println(fbvo);
     model.addAttribute("fbvo",fbvo);
     
     
-    return"/board/readFree";
+    return"/boardf/readFree";
     
   }
   

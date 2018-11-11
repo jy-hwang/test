@@ -24,5 +24,10 @@ values(#{fTitle},#{fContent},#{fWriter},#{mno},#{mcate})
 
 </select>
 
+<select id="readFree" resultType="freeBoardVo">
+select * from tbl_board_free where fno = #{fno}
+</select>
+
+
 
 </mapper>

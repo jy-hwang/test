@@ -7,10 +7,13 @@ import net.koreate.vo.SearchCriteria;
 
 public interface FreeBoardDao {
 
-  void register(FreeBoardVo fbvo);
+  void register(FreeBoardVo fbvo) throws Exception;
 
-  List<FreeBoardVo> listFreeCriteria(SearchCriteria cri);
+  List<FreeBoardVo> listFreeCriteria(SearchCriteria cri) throws Exception;
 
-  int listFreeCount(SearchCriteria cri);
+  int listFreeCount(SearchCriteria cri) throws Exception;
+
+FreeBoardVo readFree(int fno) throws Exception;
+
   
 }

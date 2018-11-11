@@ -33,8 +33,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
       MemberVo memberVo = (MemberVo) member;
       int mno = memberVo.getmNo();
       String mcate = memberVo.getmCate();
-      String bno = request.getParameter("bno");
-      System.out.println("bno : " + bno);
+      String fno = request.getParameter("fno");
+      System.out.println("fno : " + fno);
       return true;
       
     }
