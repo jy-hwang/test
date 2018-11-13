@@ -70,6 +70,7 @@ public class MemberController {
   
   @RequestMapping(value = "/Modify", method = RequestMethod.GET)
   public void Modify(@ModelAttribute("mNo") int mno, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+    
     MemberVo vo = service.getMemberByMno(mno);
     
     model.addAttribute("memberVo", vo);
@@ -78,6 +79,7 @@ public class MemberController {
   @RequestMapping(value = "/Modify", method = RequestMethod.POST)
   public void ModifyPOST(@RequestParam("mNo") int mno, Model model) throws Exception {
     System.out.println("ModifyPost called");
+    
     MemberVo vo = service.getMemberByMno(mno);
     model.addAttribute("memberVo", vo);
   }

@@ -16,5 +16,11 @@ public interface FreeBoardService {
   PageMaker getPageMaker(SearchCriteria cri) throws Exception;
 
   FreeBoardVo readFree(int fno) throws Exception;
+
+  void modify(FreeBoardVo fbvo) throws Exception;
+
+  FreeBoardVo getPostByfNo(int fno)throws Exception;
+
+  void remove(int fno) throws Exception;
   
 }

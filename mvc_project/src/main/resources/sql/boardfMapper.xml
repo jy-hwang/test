@@ -28,6 +28,23 @@ values(#{fTitle},#{fContent},#{fWriter},#{mno},#{mcate})
 select * from tbl_board_free where fno = #{fno}
 </select>
 
+<update id="modify">
+
+update tbl_board_free set ftitle=#{fTitle}, fcontent=#{fContent} where fno = #{fNo}
+
+</update>
+
+<select id="getPostByfNo" resultType="freeBoardVo">
+
+select * from tbl_board_free where fno = #{fno}
+
+</select>
+
+<delete id="remove">
+
+delete from tbl_board_free where fno = #{fno}
+
+</delete>
 
 
 </mapper>

@@ -27,6 +27,8 @@
     <interceptor>
       <mapping path="/boardf/*"/>
       <exclude-mapping path="/boardf/listFree"/>
+      <exclude-mapping path="/boardf/readDetail"/>
+      <exclude-mapping path="/boardf/readFree"/>
       <beans:ref bean="authInterceptor"/>
 
 

@@ -32,7 +32,7 @@ $(document).ready(function() {
 
   $("#withdrawalBtn").on("click", function() {
     console.log("탈퇴하기 버튼 클릭");
-    var delConfirm = confirm("탈퇴하시겠습니까?")
+    var delConfirm = confirm("")
     if (delConfirm) {
       formObj.attr("action", "/member/Withdrawal");
       formObj.attr("method", "delete");

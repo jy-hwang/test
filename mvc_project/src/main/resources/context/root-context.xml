@@ -42,6 +42,8 @@
     <constructor-arg ref="sqlSessionFactory"></constructor-arg>
 
   </bean>
+  
+  
 
   <mybatis-spring:scan base-package="net.koreate.dao"/>
 

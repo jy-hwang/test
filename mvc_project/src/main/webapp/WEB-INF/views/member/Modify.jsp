@@ -5,10 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/modify.js?ver=1"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/modify.js?ver=2"></script>
+<style>
+#container{
+dilplay : flex;
+justify-content: center;
+align-items:center;
+}
+
+</style>
 </head>
 <body>
   <article>
+  <div class="container" id="container">
     <form name="form1" method="POST" class="form-horizontal">
       <!-- <form id="adm_form" action="/member/signUpPost" method="post"> -->
       <div class="req_table_wrap">
@@ -144,7 +153,7 @@
       <button type="button" class="btn btn-info" id="btnWithdrawal">탈퇴하기</button>
       
     </div>
-    
+    </div>
   </article>
   <footer>
     <%@include file="../include/footer.jsp"%>

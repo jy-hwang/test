@@ -45,7 +45,7 @@
       <h3>게시판가기</h3>
       <ul>
         <li>
-          <a href="/member/test1">테스트페이지</a>
+          <a href="/search/searchGet">테스트페이지</a>
         </li>
         <li>
           <a href="">도서목록</a>

@@ -11,10 +11,6 @@ import net.koreate.vo.SearchCriteria;
 @Repository
 public interface MemberDao {
 
- 
-
-
-
 void signUp(MemberVo vo) throws Exception;
 
 MemberVo signIn(SignInDto dto) throws Exception;

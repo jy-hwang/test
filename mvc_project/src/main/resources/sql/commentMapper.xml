@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.koreate.dao.CommentDao">
+
+
+<insert id="create">
+insert into tbl_comment_free(fno,commentText,commentAuth,mno)
+values(#{fno},#{commentText},#{commentAuth},#{mno})
+</insert>
+
+
+<select id="list" resultType="commentVo">
+
+select * from tbl_comment_free
+where fno = #{fno} order by cno desc
+
+</select>
+
+<select id="count" resultType="int">
+select count(fno) from tbl_comment_free
+where fno = #{fno} 
+</select>
+
+<select id="listPage" parameterType="java.util.HashMap" resultType="commentVo">
+select * from tbl_comment_free where fno = #{fno} order by cno desc
+limit #{cri.pageStart}, #{cri.perPageNum}</select>
+
+
+</mapper>

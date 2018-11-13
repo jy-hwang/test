@@ -140,7 +140,7 @@ $(document).ready(function() {
     console.log("탈퇴하기 버튼 클릭");
     console.log(form2);
     
-    if (confirm("탈퇴하시겠습니까?")) {
+    if (confirm("작성한 모든 글이 삭제됩니다. 탈퇴하시겠습니까??")) {
       form2.attr('action', '/member/Withdrawal');
       form2.attr('method', 'post');
       form2.submit();
