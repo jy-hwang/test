@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css?ver=10">
 </head>
 <body>
   <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -38,5 +38,3 @@
   <div class="clear"></div>
   <hr>
   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
-</body>
-</html>

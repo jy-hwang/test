@@ -50,6 +50,8 @@ public class FreeBoardController {
   @RequestMapping(value = "/readFree", method = RequestMethod.GET)
   public String readFree(@RequestParam("fno") int fno, @ModelAttribute("cri") SearchCriteria cri, RedirectAttributes rttr) throws Exception {
     
+    service.updateCnt(fno);
+    
     rttr.addAttribute("fno", fno);
     rttr.addAttribute("page", cri.getPage());
     rttr.addAttribute("perPageNum", cri.getPerPageNum());

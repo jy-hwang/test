@@ -19,11 +19,14 @@ public class CommentServiceImpl implements CommentService {
   @Inject
   CommentDao dao;
   
+  
+  // 댓글 등록
   @Override
   public void addComment(CommentVo vo) throws Exception {
     dao.create(vo);
   }
   
+  //fno 게시물의 모든 댓글
   @Override
   public List<CommentVo> commentList(int fno) throws Exception {
     
@@ -52,6 +55,13 @@ public class CommentServiceImpl implements CommentService {
     map.put("cri", cri);
     
     return dao.listPage(map);
+  }
+//댓글 수정
+  @Override
+  public void modifyComment(CommentVo vo) throws Exception {
+
+    dao.update(vo);
+    
   }
   
 }

@@ -15,5 +15,7 @@ public interface CommentService {
   PageMaker getPageMaker(int page, int fno) throws Exception;
 
   List<CommentVo> listCommentPage(int fno, Criteria cri) throws Exception;
+
+  void modifyComment(CommentVo vo) throws Exception;
   
 }

@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시판</title>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/listReply.js?ver=1"></script>
 </head>
 <body>
   <section class="content">
@@ -33,10 +32,12 @@
                 <tr>
                   <td>${fbvo.fNo}</td>
                   <td>
-                  <a href="/boardf/readFree?fno=${fbvo.fNo}">${fbvo.fTitle}</a>
+                    <a href="/boardf/readFree?fno=${fbvo.fNo}">${fbvo.fTitle}</a>
                   </td>
                   <td>${fbvo.fWriter}</td>
-                  <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${fbvo.fRegdate}" /></td>
+                  <td>
+                    <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${fbvo.fRegdate}" />
+                  </td>
                   <td>${fbvo.fViewcnt}</td>
                   <td>${fbvo.fRecomcnt}</td>
                 </tr>
@@ -60,7 +61,7 @@
               <c:if test="${pageMaker.next}">
                 <li class="page-item">
                   <%-- <a class="page-link" href="listFree${pageMaker.makeQuery(pageMaker.endPage+1)}">Next</a> --%>
-               <a class="page-link" href="listFree${pageMaker.makeSearch(pageMaker.endPage+1)}">Next</a>
+                  <a class="page-link" href="listFree${pageMaker.makeSearch(pageMaker.endPage+1)}">Next</a>
                 </li>
               </c:if>
             </ul>
@@ -90,8 +91,47 @@
       <hr />
     </div>
   </section>
+  
+  <script>
+      $(document).ready(function() {
+
+        $("#searchBtn").on("click", function() {
+          var result = '${pageMaker.makeQuery(1)}';
+          location.href = "/boardf/listFree" + result + "&searchType=" + $("select option:selected").val() + "&keyword=" + $("#keywordInput").val();
+
+        });
+
+        $("#btnRegister").on("click", function() {
+          console.log("글쓰기 버튼 클릭");
+          window.location.href = '/boardf/register'
+        })
+
+        var formObj = $("#adm_form");
+        $("#modifyBtn").on("click", function() {
+          console.log("수정하기 버튼 클릭");
+          formObj.attr("action", "/member/Modify");
+          formObj.attr("method", "get");
+          formObj.submit();
+
+        });
+
+        $("#withdrawalBtn").on("click", function() {
+          console.log("탈퇴하기 버튼 클릭");
+          var delConfirm = confirm("탈퇴하시겠습니까?")
+          if (delConfirm) {
+            formObj.attr("action", "/member/Withdrawal");
+            formObj.attr("method", "delete");
+            formObj.submit();
+            alert("탈퇴 처리되었습니다.")
+            window.location.href = '/';
+          } else {
+            alert("탈퇴처리 취소되었습니다.")
+            window.location.href = '/';
+          }
+        });
+
+      });
+    </script>
   <footer>
     <%@include file="../include/footer.jsp"%>
   </footer>
-</body>
-</html>

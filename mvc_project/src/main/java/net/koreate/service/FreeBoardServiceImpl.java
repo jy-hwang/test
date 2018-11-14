@@ -22,52 +22,57 @@ public class FreeBoardServiceImpl implements FreeBoardService {
   public void register(FreeBoardVo fbvo) throws Exception {
     dao.register(fbvo);
   }
-
+  
   @Override
   public List<FreeBoardVo> listFreeCriteria(SearchCriteria cri) throws Exception {
-List<FreeBoardVo> list = dao.listFreeCriteria(cri);
-
+    List<FreeBoardVo> list = dao.listFreeCriteria(cri);
+    
     return list;
   }
-
+  
   @Override
-  public PageMaker getPageMaker(SearchCriteria cri) throws Exception{
+  public PageMaker getPageMaker(SearchCriteria cri) throws Exception {
     PageMaker pageMaker = new PageMaker();
     pageMaker.setCri(cri);
     int cnt = dao.listFreeCount(cri);
     pageMaker.setTotalCount(cnt);
     return pageMaker;
   }
-
+  
   @Override
   public FreeBoardVo readFree(int fno) throws Exception {
-
-	  FreeBoardVo fbvo = dao.readFree(fno);
+    
+    FreeBoardVo fbvo = dao.readFree(fno);
     
     return fbvo;
   }
+  
   @Transactional
   @Override
   public void modify(FreeBoardVo fbvo) throws Exception {
- 
+    
     System.out.println("modify 서비스 실행 : " + fbvo);
     
     dao.modify(fbvo);
     
   }
-
+  
   @Override
   public FreeBoardVo getPostByfNo(int fno) throws Exception {
     
     return dao.getPostByfNo(fno);
   }
-
+  
   @Override
   public void remove(int fno) throws Exception {
-      dao.remove(fno);
+    dao.remove(fno);
     
   }
   
-  
+  @Override
+  public void updateCnt(int fno) throws Exception {
+    dao.updateCnt(fno);
+    
+  }
   
 }

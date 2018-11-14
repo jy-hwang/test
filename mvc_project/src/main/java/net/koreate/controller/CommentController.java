@@ -22,69 +22,83 @@ import net.koreate.vo.PageMaker;
 @RequestMapping("/comments")
 public class CommentController {
   
-  
   @Inject
   CommentService service;
   
-  @RequestMapping(value="", method=RequestMethod.POST)
-  public ResponseEntity<String> register(@RequestBody CommentVo vo){
+  @RequestMapping(value = "", method = RequestMethod.POST)
+  public ResponseEntity<String> register(@RequestBody CommentVo vo) {
     
     ResponseEntity<String> entity = null;
     
     try {
       service.addComment(vo);
-      entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+      entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
     } catch (Exception e) {
       e.printStackTrace();
-      entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+      entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
-    
     
     return entity;
   }
-  @RequestMapping(value="/all/{fNo}",method=RequestMethod.GET)
-  public ResponseEntity<List<CommentVo>> list(@PathVariable("fNo") int fno){
+  
+  @RequestMapping(value = "/all/{fNo}", method = RequestMethod.GET)
+  public ResponseEntity<List<CommentVo>> list(@PathVariable("fNo") int fno) {
     
     ResponseEntity<List<CommentVo>> entity = null;
     
     try {
       List<CommentVo> list = service.commentList(fno);
-      entity = new ResponseEntity<List<CommentVo>>(list,HttpStatus.OK);
+      entity = new ResponseEntity<List<CommentVo>>(list, HttpStatus.OK);
     } catch (Exception e) {
       e.printStackTrace();
       entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     
+    return entity;
     
-  return entity;
-  
   }
   
-  
-  
-  
-  
-  @RequestMapping(value="/{fno}/{page}",method=RequestMethod.GET)
-  public ResponseEntity<Map<String, Object>> listPage(
-    @PathVariable("fno") int fno,
-    @PathVariable("page") int page){
+  @RequestMapping(value = "/{fno}/{page}", method = RequestMethod.GET)
+  public ResponseEntity<Map<String, Object>> listPage(@PathVariable("fno") int fno, @PathVariable("page") int page) {
     
-    ResponseEntity<Map<String,Object>> entity = null;
+    ResponseEntity<Map<String, Object>> entity = null;
     
     try {
-      PageMaker pageMaker = service.getPageMaker(page,fno);
-      Map<String,Object> map = new HashMap<>();
-      List<CommentVo> list = service.listCommentPage(fno,pageMaker.getCri());
+      PageMaker pageMaker = service.getPageMaker(page, fno);
+      Map<String, Object> map = new HashMap<>();
+      List<CommentVo> list = service.listCommentPage(fno, pageMaker.getCri());
       map.put("pageMaker", pageMaker);
       map.put("list", list);
-      entity = new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
+      entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
     } catch (Exception e) {
-
+      
       e.printStackTrace();
       entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     return entity;
   }
+  
+  @RequestMapping(value="/{cno}", method= {RequestMethod.PUT, RequestMethod.PATCH})
+  public ResponseEntity<String> update(@PathVariable("cno") int cno, @RequestBody CommentVo vo){
+    
+    ResponseEntity<String> entity = null;
+    
+    try {
+      vo.setCno(cno);
+      service.modifyComment(vo);
+      entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+    } catch (Exception e) {
+      e.printStackTrace();
+      entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    
+    return entity;
+  }
+  
+  
+  
+  
+  
   
   
   

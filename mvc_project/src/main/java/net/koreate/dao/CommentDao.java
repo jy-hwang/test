@@ -14,5 +14,7 @@ public interface CommentDao {
   int count(int fno) throws Exception;
 
   List<CommentVo> listPage(Map<String, Object> map) throws Exception;
+
+  void update(CommentVo vo) throws Exception;
   
 }

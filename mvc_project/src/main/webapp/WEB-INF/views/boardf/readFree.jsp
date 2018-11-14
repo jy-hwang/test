@@ -29,9 +29,13 @@
                 <textarea name="fContent" class="form-control" cols="30" rows="10" readonly>${fbvo.fContent}</textarea>
               </div>
               <div class="form-group">
-                <c:if test="${!empty userInfo && fbvo.mno == userInfo.mNo}">
-                  <button type="button" id="modifyBtn" class="btn btn-info pull-center">수정/삭제</button>
+                <c:if test="${!empty userInfo}">
+                  <c:if test="${fbvo.mno == userInfo.mNo}">
+                    <button type="button" id="modifyBtn" class="btn btn-info pull-center">수정/삭제</button>
+                  </c:if>
+                  <button type="button" id="registerBtn" class="btn btn-danger">새글쓰기</button>
                 </c:if>
+                <button type="button" id="listBtn" class="btn btn-success">목록보기</button>
               </div>
             </div>
           </form>
@@ -73,7 +77,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title"></h4>
+              <h6 class="modal-title"></h6>
             </div>
             <div class="modal-body">
               <p>
@@ -91,7 +95,6 @@
     </div>
   </div>
 </section>
-
 <script id="template" type="text/x-handlebars-template">
   {{#each.}}
     <li class="commentLi" data-cno={{cno}}>
@@ -114,7 +117,6 @@
     </li>
   {{/each}}
 </script>
-
 <script>
   Handlebars.registerHelper("prettifyDate", function(timeValue) {
     var dataObj = new Date(timeValue);
@@ -244,6 +246,33 @@
 
   $("#commentModBtn").on("click", function() {
     alert("수정");
+
+    var cno = $(".modal-title").html();
+    var commentText = $("#commentText").val();
+
+    $.ajax({
+    type : 'put',
+    url : '/comments/' + cno,
+    headers : {
+    "Content-Type" : "application/json",
+    "X-HTTP-Method-Override" : "PUT"
+    },
+    dataType : "text",
+    data : JSON.stringify({
+
+      commentText : commentText
+
+    }),
+    success : function(result) {
+      if (result == "SUCCESS") {
+        alert("등록완료");
+        var pageInfo = "/comments/" + bno + "/" + commentPage;
+        getPage(pageInfo, "new");
+      }
+    }
+
+    });
+
   });
 
   $("#commentDelBtn").on("click", function() {
@@ -268,6 +297,13 @@
   $(document).ready(function() {
 
     var formObj = $("#hidden");
+    $("#listBtn").on("click", function() {
+      console.log("목록보기 버튼 클릭");
+      formObj.attr("action", "/boardf/listFree");
+      formObj.attr("method", "get");
+      formObj.submit();
+    });
+
     $("#modifyBtn").on("click", function() {
       console.log("수정하기 버튼 클릭");
       formObj.attr("action", "/boardf/modifyFree");
@@ -276,9 +312,16 @@
 
     });
 
+    $("#registerBtn").on("click", function() {
+      console.log("글쓰기버튼 클릭");
+      formObj.attr("action", "/boardf/register")
+      formObj.attr("method", "get");
+      formObj.submit();
+
+    });
+
   });
 </script>
-
 <footer>
   <%@include file="../include/footer.jsp"%>
 </footer>

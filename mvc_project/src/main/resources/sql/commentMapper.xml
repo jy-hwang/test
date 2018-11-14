@@ -30,4 +30,12 @@ select * from tbl_comment_free where fno = #{fno} order by cno desc
 limit #{cri.pageStart}, #{cri.perPageNum}</select>
 
 
+<update id="update">
+
+update tbl_comment_free set commentText=#{commentText}, updatedate=now()
+where cno = #{cno}
+
+</update>
+
+
 </mapper>

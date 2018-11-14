@@ -47,7 +47,7 @@ $(document).ready(function() {
 
   $("#deleteBtn").on("click", function() {
     var formObj = $("#modifyForm");
-    var commentCnt = ${fCommentcnt};
+    /*var commentCnt = ${fCommentcnt};*/
     console.log("삭제하기 버튼 클릭");
     var delConfirm = confirm("삭제하시겠습니까?")
     if (delConfirm) {

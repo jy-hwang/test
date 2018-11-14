@@ -7,44 +7,79 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 
 <mapper namespace="net.koreate.dao.FreeBoardDao">
 
-<insert id="register">
-insert into tbl_board_free(ftitle,fcontent,fwriter,mno,mcate)
-values(#{fTitle},#{fContent},#{fWriter},#{mno},#{mcate})
-</insert>
+  <sql id="search">
+    <if test="searchType !=null">
+      <if test="searchType == 't'.toString()">
+        and ftitle like concat('%',#{keyword},'%')
+      </if>
+      <if test="searchType == 'c'.toString()">
+        and fcontent like concat('%',#{keyword},'%')
+      </if>
+      <if test="searchType == 'w'.toString()">
+        and fwriter like concat('%',#{keyword},'%')
+      </if>
+      <if test="searchType == 'tc'.toString()">
+        and ftitle like concat('%',#{keyword},'%')
+        or fcontent like concat('%',#{keyword},'%')
 
-<select id="listFreeCriteria" resultType="freeBoardVo">
+      </if>
+      <if test="searchType == 'tcw'.toString()">
+        and ftitle like concat('%',#{keyword},'%')
+        or fcontent like concat('%',#{keyword},'%')
+        or fwriter like concat('%',#{keyword},'%')
+      </if>
+    </if>
 
-<![CDATA[ select * from tbl_board_free where fno> 0 order by fno desc]]>
 
-</select>
+  </sql>
 
-<select id="listFreeCount" resultType="int">
 
-<![CDATA[select count(*) from tbl_board_free where fno>0 ]]>
 
-</select>
 
-<select id="readFree" resultType="freeBoardVo">
-select * from tbl_board_free where fno = #{fno}
-</select>
+  <insert id="register">
+    insert into tbl_board_free(ftitle,fcontent,fwriter,mno,mcate)
+    values(#{fTitle},#{fContent},#{fWriter},#{mno},#{mcate})
+  </insert>
 
-<update id="modify">
+  <select id="listFreeCriteria" resultType="freeBoardVo">
 
-update tbl_board_free set ftitle=#{fTitle}, fcontent=#{fContent} where fno = #{fNo}
+<![CDATA[ select * from tbl_board_free where fno> 0]]>  <include refid="search"></include> order by fno desc limit #{pageStart},#{perPageNum}
+<!-- <![CDATA[ SELECT * FROM re_tbl_board   where bno > 0]]> <include refid="search"></include> ORDER BY origin DESC, seq ASC limit #{pageStart},#{perPageNum} -->
 
-</update>
+  </select>
 
-<select id="getPostByfNo" resultType="freeBoardVo">
+  <select id="listFreeCount" resultType="int">
 
-select * from tbl_board_free where fno = #{fno}
+<![CDATA[select count(*) from tbl_board_free where fno>0 ]]> <include refid="search"></include>
 
-</select>
+  </select>
 
-<delete id="remove">
+  <select id="readFree" resultType="freeBoardVo">
+    select * from tbl_board_free where fno = #{fno}
+  </select>
 
-delete from tbl_board_free where fno = #{fno}
+  <update id="modify">
 
-</delete>
+    update tbl_board_free set ftitle=#{fTitle}, fcontent=#{fContent},fupdatedate=now() where fno = #{fNo}
 
+  </update>
+
+  <select id="getPostByfNo" resultType="freeBoardVo">
+
+    select * from tbl_board_free where fno = #{fno}
+
+  </select>
+
+  <delete id="remove">
+
+    delete from tbl_board_free where fno = #{fno}
+
+  </delete>
+
+  <update id="updateCnt">
+
+    update tbl_board_free set fviewcnt = fviewcnt + 1 where fno = #{fno}
+
+  </update>
 
 </mapper>

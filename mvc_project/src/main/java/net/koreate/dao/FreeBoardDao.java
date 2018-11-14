@@ -20,5 +20,7 @@ public interface FreeBoardDao {
   FreeBoardVo getPostByfNo(int fno) throws Exception;
 
   void remove(int fno) throws Exception;
+
+  void updateCnt(int fno) throws Exception;
   
 }
