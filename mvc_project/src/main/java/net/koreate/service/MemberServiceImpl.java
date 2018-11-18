@@ -63,6 +63,30 @@ public class MemberServiceImpl implements MemberService {
     dao.Withdrawal(mno);
   }
 
+@Override
+public int idcheck(String userid) throws Exception {
+	System.out.println(userid);
+	int cnt = dao.idcheck(userid);
+	
+	return cnt;
+}
+
+@Override
+public int phonecheck(String phone) throws Exception {
+System.out.println(phone);
+	int cnt = dao.phonecheck(phone);
+	
+	
+	return cnt;
+}
+
+@Override
+public int emailcheck(String email) throws Exception {
+System.out.println(email);
+	int cnt = dao.emailcheck(email);
+	return cnt;
+}
+
 
 
   

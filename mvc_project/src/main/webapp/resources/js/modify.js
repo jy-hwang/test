@@ -131,6 +131,7 @@ $(document).ready(function() {
 
         });
       }
+      if(doubleSubmitCheck()) return;
     
   });
 
@@ -150,5 +151,6 @@ $(document).ready(function() {
       alert("탈퇴처리 취소되었습니다.")
       window.location.href = '/';
     }
+    if(doubleSubmitCheck()) return;
   });
 });

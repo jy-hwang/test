@@ -81,5 +81,18 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
     update tbl_board_free set fviewcnt = fviewcnt + 1 where fno = #{fno}
 
   </update>
+  
+  <update id="recommand">
+  
+  update tbl_board_free set frecomcnt = frecomcnt + 1 where fno = #{fno}
+  
+  </update>
+
+<select id="getCommentCnt" resultType="int">
+
+select count(fno) from tbl_comment_free where fno = #{fno}
+
+</select>
+
 
 </mapper>

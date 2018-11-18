@@ -22,5 +22,9 @@ public interface FreeBoardDao {
   void remove(int fno) throws Exception;
 
   void updateCnt(int fno) throws Exception;
+
+void recommand(int fno) throws Exception;
+
+int getCommentCnt(int fno) throws Exception;
   
 }

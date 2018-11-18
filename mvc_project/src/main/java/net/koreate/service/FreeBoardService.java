@@ -24,5 +24,7 @@ public interface FreeBoardService {
   void remove(int fno) throws Exception;
 
   void updateCnt(int fno) throws Exception;
+
+  void recommand(int fno) throws Exception;
   
 }
