@@ -41,7 +41,8 @@
       </select>
       <input type="text" class="form-control">
       <input type="button" class="btn btn-primary" value="검색">
-    
+      <div id="dataArea"></div>
+    <nav>
       <h3>게시판가기</h3>
       <ul>
         <li>
@@ -60,9 +61,18 @@
           <a href="">독자후기</a>
         </li>
       </ul>
+      </nav>
     </div>
   </section>
   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+  <script>
+  $.ajax({
+    type :"GET"
+    url:
+  })
+  
+  
+  </script>
   <footer>
     <%@include file="include/footer.jsp"%>
   </footer>
