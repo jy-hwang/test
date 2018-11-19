@@ -25,6 +25,12 @@ MemberVo getMemberByMno(int mno) throws Exception;
 
 void Withdrawal(int mno) throws Exception;
 
+int idcheck(String userid) throws Exception;
+
+int phonecheck(String phone) throws Exception;
+
+int emailcheck(String email) throws Exception;
+
 
 
 

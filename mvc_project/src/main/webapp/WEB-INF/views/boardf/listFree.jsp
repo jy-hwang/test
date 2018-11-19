@@ -32,7 +32,7 @@
                 <tr>
                   <td>${fbvo.fNo}</td>
                   <td>
-                    <a href="/boardf/readFree?fno=${fbvo.fNo}">${fbvo.fTitle}</a>
+                    <a href="/boardf/readFree?fno=${fbvo.fNo}">${fbvo.fTitle}[${fbvo.fCommentcnt}]</a>
                   </td>
                   <td>${fbvo.fWriter}</td>
                   <td>

@@ -1,6 +1,8 @@
 package net.koreate.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
@@ -49,6 +51,61 @@ public class MemberController {
     service.signUp(vo);
     return "redirect:/member/signIn";
   }
+  
+  
+  @RequestMapping(value ="/idcheck")
+  @ResponseBody
+  public Map<Object,Object> idcheck(@RequestBody String userid) throws Exception{
+	  
+	  int count = 0;
+	  
+	  Map<Object, Object> map = new HashMap<Object, Object>();
+	  
+	  count = service.idcheck(userid);
+	  System.out.println("id count : " + count);
+	  map.put("cnt", count);
+	  
+	  System.out.println(map);
+	  return map;
+  }
+  
+  
+  @RequestMapping(value ="/phonecheck")
+  @ResponseBody
+  public Map<Object,Object> phonecheck(@RequestBody String phone) throws Exception{
+	  
+	  int count =0;
+	  Map<Object,Object> map = new HashMap<Object, Object>();
+	  
+	  count = service.phonecheck(phone);
+	  System.out.println("phone count : " + count);
+	  map.put("cnt", count);
+	  
+	  System.out.println(map);
+	  
+	  return map;
+	  
+	  
+  }
+  
+  @RequestMapping(value ="/emailcheck")
+  @ResponseBody
+  public Map<Object, Object> emailcheck(@RequestBody String email) throws Exception{
+	  
+	  int count =0;
+	  Map<Object, Object> map = new HashMap<Object, Object>();
+	  
+	  count = service.emailcheck(email);
+	  System.out.println("email count : " + count);
+	  map.put("cnt", count);
+	  System.out.println(map);
+	  
+	  return map;
+			  
+  }
+  
+  
+  
   
   @RequestMapping(value = "/signIn")
   public void signIn() {

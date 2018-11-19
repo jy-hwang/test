@@ -12,6 +12,18 @@
   $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
   Popper = Popper && Popper.hasOwnProperty('default') ? Popper['default'] : Popper;
 
+  
+
+  var doubleSubmitFlag = false;
+  function doubleSubmitCheck(){
+  	if(doubleSubmitFlag){
+  		return doubleSubmitFlag;
+  	}else{
+  		doubleSubmitFlag = true;
+  		return false;
+  	}
+  }
+    
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];

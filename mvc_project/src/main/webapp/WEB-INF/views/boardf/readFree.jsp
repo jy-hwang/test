@@ -1,99 +1,106 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp"%>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/handlebars-v4.0.12.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/handlebars-v4.0.12.js"></script>
 <section class="content">
-  <div class="contatiner">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="box box-success">
-          <div class="box-header">
-            <h3 class="box-title">글 내용 확인</h3>
-          </div>
-          <form id="hidden" method="post">
-            <input type="hidden" name="fno" id="fno" value="${fbvo.fNo}" />
-          </form>
-          <form>
-            <div class="box-body">
-              <div class="form-group">
-                <label for="writer">작성자</label>
-                <input type="text" name="fWriter" class="form-control" readonly value="${fbvo.fWriter}" />
-                <input type="hidden" name="mcate" id="mcate" class="form-control" value="${fbvo.mcate}" />
-                <input type="hidden" name="mno" id="mno" value="${fbvo.mno}" />
-              </div>
-              <div class="form-group">
-                <label for="title">제목</label>
-                <input type="text" name="fTitle" class="form-control" readonly value="${fbvo.fTitle}" />
-              </div>
-              <div class="form-group">
-                <label for="content">내용</label>
-                <textarea name="fContent" class="form-control" cols="30" rows="10" readonly>${fbvo.fContent}</textarea>
-              </div>
-              <div class="form-group">
-                <c:if test="${!empty userInfo}">
-                  <c:if test="${fbvo.mno == userInfo.mNo}">
-                    <button type="button" id="modifyBtn" class="btn btn-info pull-center">수정/삭제</button>
-                  </c:if>
-                  <button type="button" id="registerBtn" class="btn btn-danger">새글쓰기</button>
-                </c:if>
-                <button type="button" id="listBtn" class="btn btn-success">목록보기</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <c:if test="${!empty userInfo}">
-            <div class="box">
-              <div class="box-header with-border">
-                <h3 class="box-title">ADD NEW COMMENT</h3>
-              </div>
-              <div class="box-body">
-                <label for="cWriter">작성자</label>
-                <input type="text" class="form-control" name="cWriter" id="newCommentAuth" value="${userInfo.mName}" readonly />
-                <label for="cComment">댓글내용</label>
-                <input type="text" class="form-control" name="cComment" id="newCommentText" placeholder="내용을 입력하세요" />
-              </div>
-              <div class="box-footer">
-                <button class="btn btn-primary" id="commentAddBtn">댓글추가</button>
-              </div>
-            </div>
-          </c:if>
-          <ul class="timeline">
-            <li class="time-label" id="commentDiv">
-              <span class="bg-green">댓글목록</span>
-            </li>
-          </ul>
-          <div class="text-center">
-            <ul id="pagination" class="pagination pagination-sm no-margin"></ul>
-          </div>
-        </div>
-      </div>
-      <!--Modal Content-->
-      <div id="modifyModal" class="modal modal-primary fade" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h6 class="modal-title"></h6>
-            </div>
-            <div class="modal-body">
-              <p>
-                <input type="text" id="commentText" class="form-control" />
-              </p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" id="commentModBtn" class="btn btn-success">수정</button>
-              <button type="button" id="commentDelBtn" class="btn btn-warning">삭제</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="contatiner">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">글 내용 확인</h3>
+					</div>
+					<form id="hidden" method="post">
+						<input type="hidden" name="fno" id="fno" value="${fbvo.fNo}" />
+					</form>
+					<form>
+						<div class="box-body">
+							<div class="form-group">
+								<label for="writer">작성자</label> <input type="text"
+									name="fWriter" class="form-control" readonly
+									value="${fbvo.fWriter}" /> <input type="hidden" name="mcate"
+									id="mcate" class="form-control" value="${fbvo.mcate}" /> <input
+									type="hidden" name="mno" id="mno" value="${fbvo.mno}" />
+							</div>
+							<div class="form-group">
+								<label for="title">제목</label> <input type="text" name="fTitle"
+									class="form-control" readonly value="${fbvo.fTitle}" />
+							</div>
+							<div class="form-group">
+								<label for="content">내용</label>
+								<textarea name="fContent" class="form-control" cols="30"
+									rows="10" readonly>${fbvo.fContent}</textarea>
+							</div>
+							<div class="form-group">
+								<c:if test="${!empty userInfo}">
+									<c:if test="${fbvo.mno == userInfo.mNo}">
+										<button type="button" id="modifyBtn"
+											class="btn brn-warning pull-center">수정/삭제</button>
+									</c:if>
+									<button type="button" id="registerBtn" class="btn btn-danger">새글쓰기</button>
+									<button type="button" id="recomBtn" class="btn btn-primary">추천하기</button>
+								</c:if>
+								<button type="button" id="listBtn" class="btn btn-success">목록보기</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<c:if test="${!empty userInfo}">
+						<div class="box">
+							<div class="box-header with-border">
+								<h3 class="box-title">ADD NEW COMMENT</h3>
+							</div>
+							<div class="box-body">
+								<label for="cWriter">작성자</label> <input type="text"
+									class="form-control" name="cWriter" id="newCommentAuth"
+									value="${userInfo.mName}" readonly /> <label for="cComment">댓글내용</label>
+								<input type="text" class="form-control" name="cComment"
+									id="newCommentText" placeholder="내용을 입력하세요" />
+							</div>
+							<div class="box-footer">
+								<button class="btn btn-primary" id="commentAddBtn">댓글추가</button>
+							</div>
+						</div>
+					</c:if>
+					<ul class="timeline">
+						<li class="time-label" id="commentDiv"><span class="bg-green">댓글목록</span>
+						</li>
+					</ul>
+					<div class="text-center">
+						<ul id="pagination" class="pagination pagination-sm no-margin"></ul>
+					</div>
+				</div>
+			</div>
+			<!--Modal Content-->
+			<div id="modifyModal" class="modal modal-primary fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h6 class="modal-title"></h6>
+						</div>
+						<div class="modal-body">
+							<p>
+								<input type="text" id="commentText" class="form-control" />
+							</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="commentModBtn" class="btn btn-success">수정</button>
+							<button type="button" id="commentDelBtn" class="btn btn-warning">삭제</button>
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 <script id="template" type="text/x-handlebars-template">
   {{#each.}}
@@ -293,6 +300,8 @@
     }
 
   });
+</script>
+<script>
 
   $(document).ready(function() {
 
@@ -320,8 +329,19 @@
 
     });
 
+    $("#recomBtn").on("click",function(){
+    	console.log("추천하기버튼클릭");
+    	formObj.attr("action","/boardf/recommand")
+    	formObj.attr("method","get");
+    	formObj.submit();
+    	alert("추천되었습니다.")
+    	
+    });
+    
+    
+    
   });
 </script>
 <footer>
-  <%@include file="../include/footer.jsp"%>
+	<%@include file="../include/footer.jsp"%>
 </footer>

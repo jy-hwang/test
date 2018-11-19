@@ -17,14 +17,36 @@ select * from tbl_member_book where mid=#{mId} and mpassword=#{mPassword}
 
 <select id="getMemberById" resultType="memberVo">
 
-select * from tbl_member_book where mId = #{mId}
+select mId from tbl_member_book where mId = #{mId}
 </select>
+
+
 
 <select id="getMemberByMno" resultType="memberVo">
 
 select * from tbl_member_book where mNo = #{mNo}
 
 </select>
+
+<select id="idcheck" parameterType="String" resultType="Integer">
+
+select count(*) from tbl_member_book where mId = #{mId}
+
+</select>
+
+<select id="phonecheck" parameterType="String" resultType="Integer">
+
+select count(*) from tbl_member_book where mPhone = #{mPhone}
+
+</select>
+
+<select id="emailcheck" parameterType="String" resultType="Integer">
+
+select count(*) from tbl_member_book where mEmail = #{mEmail}
+
+</select>
+
+
 
 <update id="Modify">
 
