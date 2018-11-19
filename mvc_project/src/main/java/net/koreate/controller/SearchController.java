@@ -75,10 +75,10 @@ public class SearchController {
   }
   
   
-  @RequestMapping
+/*  @RequestMapping
   public void book_autocomplete(ModelMap modelMap, @ModelAttribute BookVo bookVo, HttpServletRequest request, HttpServletResponse response) {
     
-  }
+  }*/
   
   
   

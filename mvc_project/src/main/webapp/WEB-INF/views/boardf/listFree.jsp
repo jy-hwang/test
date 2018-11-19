@@ -66,9 +66,11 @@
               </c:if>
             </ul>
           </nav>
+          <div class="list_search">
           <form name="searchForm">
-            <div class="input-group">
-              <select class="selectpicker" name="searchType">
+            <div class="center-block">
+            <span class="sel">
+              <select name="searchType" class="form-control" style="width:30%;display:inline-block;">
                 <option value="n" <c:out value="${cri.searchType == null ? 'selected' : '' }"/>>---</option>
                 <option value="t" <c:out value="${cri.searchType == 't' ? 'selected' : '' }"/>>제목</option>
                 <option value="c" <c:out value="${cri.searchType == null ? 'selected' : '' }"/>>내용</option>
@@ -76,16 +78,20 @@
                 <option value="tc" <c:out value="${cri.searchType == null ? 'selected' : '' }"/>>제목&amp;내용</option>
                 <option value="tcw" <c:out value="${cri.searchType == null ? 'selected' : '' }"/>>전체</option>
               </select>
-              <span class="input-group">
-                <input type="text" id="keywordInput" name="keyword" class="form-control" value="${cri.keyword}" placeholder="검색어입력">
+             
+                <input type="text" class="form-control" id="keywordInput" style="width:60%;display:inline-block;"name="keyword" value="${cri.keyword}" placeholder="검색어입력">
                 <button id="searchBtn" type="button" class="btn btn-warning">SEARCH</button>
               </span>
+              </div>
+          </form>
+          </div>
+              <div>
               <c:if test="${!empty userInfo}">
                 <button type="button" class="btn btn-primary" id="btnRegister">글쓰기</button>
                 <button type="button" class="btn btn-info">아무거나</button>
               </c:if>
-            </div>
-          </form>
+              </div>
+            
         </div>
       </div>
       <hr />

@@ -40,10 +40,13 @@
 
     });
   })
+  
+  
 </script>
 </head>
 <body>
   <input type="text" id="autocompleteText" autocomplete="on" />
+  <div class="result"></div>
 </body>
 
 </html>
