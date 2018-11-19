@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css?ver=10">
+
+
 </head>
 <body>
   <script src="https://code.jquery.com/jquery-latest.js"></script>
