@@ -124,223 +124,250 @@
     </li>
   {{/each}}
 </script>
+
+
 <script>
-  Handlebars.registerHelper("prettifyDate", function(timeValue) {
-    var dataObj = new Date(timeValue);
-    var year = dataObj.getFullYear();
-    var month = dataObj.getMonth() + 1;
-    var date = dataObj.getDate();
-    return year + "/" + month + "/" + date;
+	Handlebars.registerHelper("prettifyDate", function(timeValue) {
+		var dataObj = new Date(timeValue);
+		var year = dataObj.getFullYear();
+		var month = dataObj.getMonth() + 1;
+		var date = dataObj.getDate();
+		return year + "/" + month + "/" + date;
 
-  });
+	});
 
-  Handlebars.registerHelper("isCheckAuth", function(mno, options) {
-    var usermNo = "${userInfo.mNo}";
-    if (usermNo == mno) {
-      return options.fn(this);
-    } else {
-      return options.inverse(this);
-    }
+	Handlebars.registerHelper("isCheckAuth", function(mno, options) {
+		var usermNo = "${userInfo.mNo}";
+		if (usermNo == mno) {
+			return options.fn(this);
+		} else {
+			return options.inverse(this);
+		}
 
-  });
+	});
 
-  var fno = ${fbvo.fNo};
-  var commentPage = 1;
+	var fno = ${fbvo.fNo};
+	var commentPage = 1;
 
-  function getPage(pageInfo, view) {
-    //pageInfo : /comments/fno/page
-    $.getJSON(pageInfo, function(data) {
-      console.log(data.list.length);
-      printPage(data.list, $("#commentDiv"), $("#template"), view);
+	function getPage(pageInfo, view) {
+		//pageInfo : /comments/fno/page
+		$
+				.getJSON(pageInfo,
+						function(data) {
+							console.log(data.list.length);
+							printPage(data.list, $("#commentDiv"),
+									$("#template"), view);
 
-      //printPaging(data.pageMaker,$("#pagination"));
+							//printPaging(data.pageMaker,$("#pagination"));
 
-      $("#modifyModal").modal("hide");
-      $("#commentCntSmall").html("[ " + data.pageMaker.totalCount + " ]");
+							$("#modifyModal").modal("hide");
+							$("#commentCntSmall").html(
+									"[ " + data.pageMaker.totalCount + " ]");
 
-    });
-  }
-  var printPage = function(commentData, target, templateObj, view) {
-    var template = Handlebars.compile(templateObj.html());
-    var html = template(commentData);
+						});
+	}
+	var printPage = function(commentData, target, templateObj, view) {
+		var template = Handlebars.compile(templateObj.html());
+		var html = template(commentData);
 
-    //$(".commentLi").remove();
-    //target.after(html);
+		//$(".commentLi").remove();
+		//target.after(html);
 
-    if (view == "new") {
-      $(".commentLi").remove();
-    }
-    target.parent().append(html);
-  }
+		if (view == "new") {
+			$(".commentLi").remove();
+		}
+		target.parent().append(html);
+	}
 
-  $("#pagination").on("click", "li a", function(event) {
-    event.preventDefault();
-    commentPage = $(this).attr("href");
-    getPage("/comments/" + fno + "/" + commentPage);
+	$("#pagination").on("click", "li a", function(event) {
+		event.preventDefault();
+		commentPage = $(this).attr("href");
+		getPage("/comments/" + fno + "/" + commentPage);
 
-  });
+	});
 
-  var printPaging = function(pageMaker, target) {
-    var str = "";
+	var printPaging = function(pageMaker, target) {
+		var str = "";
 
-    if (pageMaker.prev) {
-      str += "<li><a href='" + (pageMaker.startPage - 1) + "'> << </a></li>";
+		if (pageMaker.prev) {
+			str += "<li><a href='" + (pageMaker.startPage - 1)
+					+ "'> << </a></li>";
 
-    }
+		}
 
-    for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
-      var strClass = pageMaker.cri.page == i ? 'class=active' : '';
-      str += "<li " + strClass+"><a href='"+i+"'>" + i + "</a></li>";
+		for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
+			var strClass = pageMaker.cri.page == i ? 'class=active' : '';
+			str += "<li " + strClass+"><a href='"+i+"'>" + i + "</a></li>";
 
-    }
+		}
 
-    if (pageMaker.next) {
-      str += "<li><a href='" + (pageMaker.endPage + 1) + "'> >> </a></li>";
+		if (pageMaker.next) {
+			str += "<li><a href='" + (pageMaker.endPage + 1)
+					+ "'> >> </a></li>";
 
-    }
+		}
 
-    target.html(str);
-  }
+		target.html(str);
+	}
 
-  $("#commentDiv").on("click", function() {
-    if ($(".timeline li").size() > 1) {
-      return;
-    }
-    var pageInfo = "/comments/" + fno + "/1";
-    getPage(pageInfo, "new");
-  });
+	$("#commentDiv").on("click", function() {
+		if ($(".timeline li").size() > 1) {
+			return;
+		}
+		var pageInfo = "/comments/" + fno + "/1";
+		getPage(pageInfo, "new");
+	});
 
-  $("#commentAddBtn").on("click", function() {
-    var auth = $("#newCommentAuth").val();
-    var text = $("#newCommentText").val();
-    var mno = "${userInfo.mNo}";
+	$("#commentAddBtn").on("click", function() {
+		var auth = $("#newCommentAuth").val();
+		var text = $("#newCommentText").val();
+		var mno = "${userInfo.mNo}";
 
-    $.ajax({
-    type : 'post',
-    url : '/comments',
-    headers : {
-    "Content-Type" : "application/json",
-    "X-HTTP-Method-Override" : "POST"
-    },
-    dataType : "text",
-    data : JSON.stringify({
-    fno : fno,
-    commentText : text,
-    commentAuth : auth,
-    mno : mno
+		$.ajax({
+			type : 'post',
+			url : '/comments',
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "POST"
+			},
+			dataType : "text",
+			data : JSON.stringify({
+				fno : fno,
+				commentText : text,
+				commentAuth : auth,
+				mno : mno
 
-    }),
-    success : function(result) {
-      if (result == "SUCCESS") {
-        alert("등록완료");
-        commentPage = 1;
-        var pageInfo = "/comments/" + fno + "/" + commentPage;
-        getPage(pageInfo, "new");
-        $("#newCommentAuth").val("");
-        $("#newCommentText").val("");
-      }
-    }
-    });
+			}),
+			success : function(result) {
+				if (result == "SUCCESS") {
+					alert("등록완료");
+					commentPage = 1;
+					var pageInfo = "/comments/" + fno + "/" + commentPage;
+					getPage(pageInfo, "new");
+					$("#newCommentAuth").val("");
+					$("#newCommentText").val("");
+				}
+			}
+		});
 
-  });
+	});
 
-  $(".timeline").on("click", ".commentLi", function() {
+	$(".timeline").on("click", ".commentLi", function() {
 
-    var comment = $(this);
-    $(".modal-title").html(comment.attr("data-cno"));
-    $("#commentText").val(comment.find(".timeline-body").text());
-  });
+		var comment = $(this);
+		$(".modal-title").html(comment.attr("data-cno"));
+		$("#commentText").val(comment.find(".timeline-body").text());
+	});
 
-  $("#commentModBtn").on("click", function() {
-    alert("수정");
+	$("#commentModBtn").on("click", function() {
+		alert("수정");
 
-    var cno = $(".modal-title").html();
-    var commentText = $("#commentText").val();
+		var cno = $(".modal-title").html();
+		var commentText = $("#commentText").val();
 
-    $.ajax({
-    type : 'put',
-    url : '/comments/' + cno,
-    headers : {
-    "Content-Type" : "application/json",
-    "X-HTTP-Method-Override" : "PUT"
-    },
-    dataType : "text",
-    data : JSON.stringify({
+		$.ajax({
+			type : 'put',
+			url : '/comments/' + cno,
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "PUT"
+			},
+			dataType : "text",
+			data : JSON.stringify({
 
-      commentText : commentText
+				commentText : commentText
 
-    }),
-    success : function(result) {
-      if (result == "SUCCESS") {
-        alert("등록완료");
-        var pageInfo = "/comments/" + bno + "/" + commentPage;
-        getPage(pageInfo, "new");
-      }
-    }
+			}),
+			success : function(result) {
+				if (result == "SUCCESS") {
+					alert("등록완료");
+					var pageInfo = "/comments/" + bno + "/" + commentPage;
+					getPage(pageInfo, "new");
+				}
+			}
 
-    });
+		});
 
-  });
+	});
 
-  $("#commentDelBtn").on("click", function() {
-    alert("삭제");
-  });
+	$("#commentDelBtn").on("click", function() {
+		var cno = $(".modal-title").html();
 
-  $(window).scroll(function() {
-    var dh = $(document).height();
-    var wt = $(window).scrollTop();
-    var wh = $(window).height();
-    if ((wt + wh) > (dh - 10)) {
-      if ($(".timeline li").size() <= 1) {
-        return;
-      }
-      commentPage++;
-      var pageInfo = "/comments/" + fno + "/" + commentPage;
-      getPage(pageInfo);
-    }
+		$.ajax({
+			type : 'delete',
+			url : '/comments/' + cno,
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "delete"
+			},
+			dataType : "text",
+			data : JSON.stringify({
 
-  });
+				commentText : commentText
+
+			}),
+			success : function(result) {
+				if (result == "SUCCESS") {
+					alert("삭제완료");
+					var pageInfo = "/comments/" + bno + "/" + commentPage;
+					getPage(pageInfo);
+				}
+			}
+		});
+	});
+
+	$(window).scroll(function() {
+		var dh = $(document).height();
+		var wt = $(window).scrollTop();
+		var wh = $(window).height();
+		if ((wt + wh) > (dh - 10)) {
+			if ($(".timeline li").size() <= 1) {
+				return;
+			}
+			commentPage++;
+			var pageInfo = "/comments/" + fno + "/" + commentPage;
+			getPage(pageInfo);
+		}
+
+	});
 </script>
 <script>
+	$(document).ready(function() {
 
-  $(document).ready(function() {
+		var formObj = $("#hidden");
+		$("#listBtn").on("click", function() {
+			console.log("목록보기 버튼 클릭");
+			formObj.attr("action", "/boardf/listFree");
+			formObj.attr("method", "get");
+			formObj.submit();
+		});
 
-    var formObj = $("#hidden");
-    $("#listBtn").on("click", function() {
-      console.log("목록보기 버튼 클릭");
-      formObj.attr("action", "/boardf/listFree");
-      formObj.attr("method", "get");
-      formObj.submit();
-    });
+		$("#modifyBtn").on("click", function() {
+			console.log("수정하기 버튼 클릭");
+			formObj.attr("action", "/boardf/modifyFree");
+			formObj.attr("method", "get");
+			formObj.submit();
 
-    $("#modifyBtn").on("click", function() {
-      console.log("수정하기 버튼 클릭");
-      formObj.attr("action", "/boardf/modifyFree");
-      formObj.attr("method", "get");
-      formObj.submit();
+		});
 
-    });
+		$("#registerBtn").on("click", function() {
+			console.log("글쓰기버튼 클릭");
+			formObj.attr("action", "/boardf/register")
+			formObj.attr("method", "get");
+			formObj.submit();
 
-    $("#registerBtn").on("click", function() {
-      console.log("글쓰기버튼 클릭");
-      formObj.attr("action", "/boardf/register")
-      formObj.attr("method", "get");
-      formObj.submit();
+		});
 
-    });
+		$("#recomBtn").on("click", function() {
+			console.log("추천하기버튼클릭");
+			formObj.attr("action", "/boardf/recommand")
+			formObj.attr("method", "get");
+			formObj.submit();
+			alert("추천되었습니다.")
 
-    $("#recomBtn").on("click",function(){
-    	console.log("추천하기버튼클릭");
-    	formObj.attr("action","/boardf/recommand")
-    	formObj.attr("method","get");
-    	formObj.submit();
-    	alert("추천되었습니다.")
-    	
-    });
-    
-    
-    
-  });
+		});
+
+	});
 </script>
 <footer>
 	<%@include file="../include/footer.jsp"%>

@@ -301,25 +301,19 @@ var emck = 0;
 	  
   });
   
-		  $("#adm_submit").click(function() {
-			var el ="adm_last_text"
-			if (!boolAdmId){
-				showSuccessMessage(el,"id중복 검사를 해주세요!");
-				$("#adm_id").focus();
-		   } else if(!boolAdmEmail) {
-				showSuccessMessage(el,"이메일 검사를 해주세요!");
-				$("#adm_email_1").focus();
-			} else if (!boolAdmPass2) {
-				showSuccessMessage(el,"비밀번호를 확인해주세요.");
-				$("#adm_pass").focus();
-			} else if (!boolAdmPhone) {
-				showSuccessMessage(el,"전화번호를 확인해주세요");
-				$("#adm_mobile_3").focus();
-			} else if(!boolAdmBirth){
-				showSuccessMessage(el,"생년월일 6자리를 확인해주세요");
-			}
-		});
-
+		$('#adm_form').validate({
+		rules:{
+			
+			mPhone2:{required:true,}
+			
+			
+		},
+		message:{},
+		
+		
+			
+		})
+		
 
 
 });
@@ -405,6 +399,29 @@ id로 가져올때 #, class 로 가져올때 .
       var phoneT = $("#adm_mobile_1").val() + "-" + $("#adm_mobile_2").val() + "-" + $("#adm_mobile_3").val();
      console.log(phoneT); 
       $("#mPhone").val(phoneT);
-    });*/
+    });
+    
+    *  $("#adm_submit").click(function() {
+			var el ="adm_last_text"
+			if (!boolAdmId){
+				showSuccessMessage(el,"id중복 검사를 해주세요!");
+				$("#adm_id").focus();
+		   } else if(!boolAdmEmail) {
+				showSuccessMessage(el,"이메일 검사를 해주세요!");
+				$("#adm_email_1").focus();
+			} else if (!boolAdmPass2) {
+				showSuccessMessage(el,"비밀번호를 확인해주세요.");
+				$("#adm_pass").focus();
+			} else if (!boolAdmPhone) {
+				showSuccessMessage(el,"전화번호를 확인해주세요");
+				$("#adm_mobile_3").focus();
+			} else if(!boolAdmBirth){
+				showSuccessMessage(el,"생년월일 6자리를 확인해주세요");
+			}
+		});
+
+    *
+    *
+    */
 
 

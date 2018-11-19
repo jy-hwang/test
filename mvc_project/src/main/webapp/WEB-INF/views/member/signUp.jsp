@@ -15,7 +15,8 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/messages_ko.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/signup.js?ver=2"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/signup.js?ver=2"></script>
 
 </head>
 <body>
@@ -29,10 +30,10 @@
 						<td>아이디</td>
 						<td class="td_divider"></td>
 						<td><input type="text" name="mId" id="adm_id" class="adm_id"
-							required="required" /><input type="button" id="btnmId" value="id중복검사" />
-							<div id="adm_id_text" class="adm_id_text">
-							</div></td>
-							
+							required="required" /><input type="button" id="btnmId"
+							value="id중복검사" />
+							<div id="adm_id_text" class="adm_id_text"></div></td>
+
 					</tr>
 					<tr>
 						<td>이메일</td>
@@ -84,7 +85,7 @@
 						<td>비밀번호 확인</td>
 						<td class="td_divider"></td>
 						<td><input type="password" id="adm_pass2" class="adm_pass"
-							required="required" />
+							name="mPassword2" required="required" />
 							<div id="adm_pass_text_2" class="adm_result_text"></div></td>
 					</tr>
 					<tr class="tr_divider">
@@ -103,7 +104,7 @@
 					<tr>
 						<td>생년월일</td>
 						<td class="td_divider"></td>
-						<td><input type="text" id="adm_birth" name="mBirth"
+						<td><input type="number" id="adm_birth" name="mBirth"
 							class="adm_birth" placeholder="ex)890808" required="required" />
 							<div id="adm_birth_text" class="adm_result_text"></div></td>
 					</tr>
@@ -113,11 +114,11 @@
 					<tr>
 						<td>성별</td>
 						<td class="td_divider"></td>
-						<td><input type="radio" name="mGender" id="male" value="male"
+						<td><input type="radio" name="mGender" id="male" value="남성"
 							checked="checked" /> <label for="male"> <span
-								class="adm_sub_text">남자</span>
-						</label> <input type="radio" name="mGender" id="female" value="female" />
-							<label for="female"> <span class="adm_sub_text">여자</span>
+								class="adm_sub_text">남성</span>
+						</label> <input type="radio" name="mGender" id="female" value="여성" />
+							<label for="female"> <span class="adm_sub_text">여성</span>
 						</label></td>
 					</tr>
 					<tr class="tr_divider">
@@ -135,11 +136,12 @@
 								<option value="018">018</option>
 								<option value="019">019</option>
 								<option value="">직접입력</option>
-						</select> <input type="text" id="adm_mobile_2" name="mPhone2"
-							class="adm_mobile_2" placeholder="1234"> <input
-							type="text" id="adm_mobile_3" name="mPhone3" class="adm_mobile_3"
-							placeholder="5678"> <input type="button" id="chkPhone" name="btnmPhone"
-							value="중복검사" /> <input type="hidden" id="mPhone" name="mPhone" />
+						</select> <input type="number" id="adm_mobile_2" name="mPhone2"
+							class="adm_mobile_2" placeholder="1234" required> <input
+							type="number" id="adm_mobile_3" name="mPhone3" class="adm_mobile_3"
+							placeholder="5678" required> <input type="button"
+							id="chkPhone" name="btnmPhone" value="중복검사" /> <input
+							type="hidden" id="mPhone" name="mPhone" />
 							<div class="adm_result_text" id="adm_mobile_text"></div></td>
 					</tr>
 					<tr class="tr_divider">
@@ -166,7 +168,7 @@
 				<table class="req_table">
 					<tr>
 						<th colspan="2"><textarea class="policy-area" readonly>
-            잘하세요
+           Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar. The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then
 
             
             </textarea></th>
@@ -174,19 +176,19 @@
 					<tr>
 						<th colspan=2>
 							<div class="adm_accept_wrap">
-								<input type="checkbox" id="adm_accept" name="adm_accept" required="required"/> <label
-									for="adm_accept" class="accept_label">&nbsp;개인정보 수집 및
-									이용에 동의합니다.</label>
-									
+								<input type="checkbox" id="adm_accept" name="adm_accept"
+									required="required" /> <label for="adm_accept"
+									class="accept_label">&nbsp;개인정보 수집 및 이용에 동의합니다.</label>
+
 							</div>
 						</th>
 					</tr>
-					
+
 				</table>
 			</div>
 			<div class="adm_result_text" id="adm_last_text"></div>
 			<div class="btn_wrap">
-				<input type="submit" id="adm_submit" class="adm_btn" value="회원가입"/>
+				<input type="submit" id="adm_submit" class="adm_btn" value="회원가입" />
 				<input type="reset" class="adm_btn" value="다시쓰기" /> <input
 					type="button" class="adm_btn" value="취소하기" />
 			</div>

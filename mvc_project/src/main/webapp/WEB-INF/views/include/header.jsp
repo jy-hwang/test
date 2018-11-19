@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css?ver=10">
+<style>
 
+
+</style>
 
 </head>
 <body>
@@ -33,8 +36,8 @@
       <c:if test="${!empty userInfo && userInfo.mCate == 'admin' }">
         <a class="flex-sm-fill text-sm-center nav-link" href="../member/List">회원정보목록보기</a>
       </c:if>
-      <a class="flex-sm-fill text-sm-center nav-link" href="">도서관 이용안내</a>
-      <a class="flex-sm-fill text-sm-center nav-link" href="">열린마당</a>
+      <!-- <a class="flex-sm-fill text-sm-center nav-link" href="">도서관 이용안내</a> -->
+      <a class="flex-sm-fill text-sm-center nav-link" href="../boardf/listFree">자유게시판</a>
     </nav>
   </header>
   <div class="clear"></div>

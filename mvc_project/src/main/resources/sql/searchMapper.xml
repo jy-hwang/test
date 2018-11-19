@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="net.koreate.dao.SearchDao">
+
+
+	<sql id="loc">
+		<if test="searchType !=null">
+			<if test="searchType == 'a'.toString()">
+				tbl_lib_a where title like concat('%',#{keyword},'%')
+				or author like concat('%',#{keyword},'%')
+				or publisher like concat('%',#{keyword},'%')
+			</if>
+			<if test="searchType == 'b'.toString()">
+				tbl_lib_b where title like concat('%',#{keyword},'%')
+				or author like concat('%',#{keyword},'%')
+				or publisher like concat('%',#{keyword},'%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				tbl_lib_c where title like concat('%',#{keyword},'%')
+				or author like concat('%',#{keyword},'%')
+				or publisher like concat('%',#{keyword},'%')
+			</if>
+			<if test="searchType == 'd'.toString()">
+				tbl_lib_d where title like concat('%',#{keyword},'%')
+				or author like concat('%',#{keyword},'%')
+				or publisher like concat('%',#{keyword},'%')
+
+			</if>
+		</if>
+
+
+	</sql>
+
+	<select id="searchLibCriteria" resultType="bookVo">
+
+		select title, author, publisher, pubdate from
+		<include refid="loc"></include>
+		order by title desc limit
+		#{pageStart},#{perPageNum}
+
+
+	</select>
+
+
+
+
+</mapper>

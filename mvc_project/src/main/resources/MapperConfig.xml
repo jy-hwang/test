@@ -7,13 +7,14 @@
     <typeAlias alias="memberVo"  type="net.koreate.vo.MemberVo"/>
     <typeAlias alias="freeBoardVo"  type="net.koreate.vo.FreeBoardVo"/>
     <typeAlias alias="commentVo"  type="net.koreate.vo.CommentVo"/>
-    
+    <typeAlias alias="bookVo"  type="net.koreate.vo.BookVo"/>
   </typeAliases>
 
 <mappers>
 <mapper resource="sql/memberMapper.xml"/>
 <mapper resource="sql/boardfMapper.xml"/>
 <mapper resource="sql/commentMapper.xml"/>
+<mapper resource="sql/searchMapper.xml"/>
 
 
 </mappers>

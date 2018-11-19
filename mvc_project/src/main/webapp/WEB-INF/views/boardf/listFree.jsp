@@ -66,40 +66,35 @@
               </c:if>
             </ul>
           </nav>
-          <div class="list_search">
-          <form name="searchForm">
-<<<<<<< HEAD
-            <div class="input-group">
-                <select name="searchType" class="form-control" style="width:30%;display:inline-block;">
-=======
-            <div class="center-block">
-            <span class="sel">
-              <select name="searchType" class="form-control" style="width:30%;display:inline-block;">
->>>>>>> branch 'master' of https://github.com/jy-hwang/test.git
-                <option value="n" <c:out value="${cri.searchType == null ? 'selected' : '' }"/>>---</option>
-                <option value="t" <c:out value="${cri.searchType == 't' ? 'selected' : '' }"/>>제목</option>
-                <option value="c" <c:out value="${cri.searchType == null ? 'selected' : '' }"/>>내용</option>
-                <option value="w" <c:out value="${cri.searchType == null ? 'selected' : '' }"/>>작성자</option>
-                <option value="tc" <c:out value="${cri.searchType == null ? 'selected' : '' }"/>>제목&amp;내용</option>
-                <option value="tcw" <c:out value="${cri.searchType == null ? 'selected' : '' }"/>>전체</option>
-              </select>
-<<<<<<< HEAD
-              <span class="input-group">
-                <input type="text" class="form-control" id="keywordInput" style="width:60%;display:inline-block;"name="keyword" value="${cri.keyword}" placeholder="검색어입력">
-               
-=======
-             
-                <input type="text" class="form-control" id="keywordInput" style="width:60%;display:inline-block;"name="keyword" value="${cri.keyword}" placeholder="검색어입력">
->>>>>>> branch 'master' of https://github.com/jy-hwang/test.git
-                <button id="searchBtn" type="button" class="btn btn-warning">SEARCH</button>
-              </span>
-              </div>
-          </form>
-          </div>
-              <div>
+					<div>
+						<form name="searchForm">
+							<span> <select name="searchType"
+								class="form-control" style="width: 30%; display: inline-block;">
+
+									<option value="n"
+										<c:out value="${cri.searchType == null ? 'selected' : '' }"/>>---</option>
+									<option value="t"
+										<c:out value="${cri.searchType == 't' ? 'selected' : '' }"/>>제목</option>
+									<option value="c"
+										<c:out value="${cri.searchType == 'c' ? 'selected' : '' }"/>>내용</option>
+									<option value="w"
+										<c:out value="${cri.searchType == 'w' ? 'selected' : '' }"/>>작성자</option>
+									<option value="tc"
+										<c:out value="${cri.searchType == 'tc' ? 'selected' : '' }"/>>제목&amp;내용</option>
+									<option value="tcw"
+										<c:out value="${cri.searchType == 'tcw' ? 'selected' : '' }"/>>전체</option>
+							</select> <input type="text" class="form-control" id="keywordInput"
+								style="width: 60%; display: inline-block;" name="keyword"
+								value="${cri.keyword}" placeholder="검색어입력">
+
+								<button id="searchBtn" type="button" class="btn btn-warning">SEARCH</button>
+							</span>
+						</form>
+					</div>
+					<div>
               <c:if test="${!empty userInfo}">
                 <button type="button" class="btn btn-primary" id="btnRegister">글쓰기</button>
-                <button type="button" class="btn btn-info">아무거나</button>
+                
               </c:if>
               </div>
             
